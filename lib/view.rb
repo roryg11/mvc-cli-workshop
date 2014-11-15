@@ -1,10 +1,13 @@
 class View
-  def initialize(output)
+  attr_reader :input, :output
+
+  def initialize(input, output)
+    @input = input
     @output = output
   end
 
-  def output
-    @output
+  def get_input
+    input.gets.chomp
   end
 
   def print_project_menu

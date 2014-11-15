@@ -2,8 +2,26 @@ class Model
   attr_reader :projects, :tasks
 
   def initialize
-    @projects = []
+    @projects = read_file
     @tasks = []
+    # @file = File.open('projects.txt', 'w')
+  end
+
+  def read_file
+    if File.exist?('projects.txt') #Is there a file?
+      data_string = File.open('projects.txt', 'r').read #put all things in file in the data string
+      data_string.split("\n") #Gives each project in an array
+    else
+      []
+    end
+  end
+
+  def write_file #must iterate over the array
+    # @file.write("#{projects}")
+    data_string = @projects.join("\n")
+    File.open('projects.txt', 'w') do |file_gutz|
+      file_gutz.write(data_string)
+    end #closes the file
   end
 
   def project_add(name)
